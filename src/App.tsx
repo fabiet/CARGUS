@@ -58,42 +58,43 @@ function App() {
         <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-500/5 to-purple-500/10"></div>
       </div>
 
-      {/* Navigation */}
+      {/* Navigation - Fixed mobile menu visibility */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? 'bg-slate-950/90 backdrop-blur-md border-b border-slate-800/50 py-3' 
           : 'bg-transparent py-4'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between min-h-[60px]">
           <button 
             onClick={() => handleNavigation('home')}
-            className="flex items-center space-x-2 hover:scale-105 transition-transform duration-200 group"
+            className="flex items-center space-x-2 hover:scale-105 transition-transform duration-200 group flex-shrink-0"
           >
             <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all duration-200">
               <Ship size={18} className="text-white" />
             </div>
-            <span className="text-lg sm:text-xl font-semibold group-hover:text-blue-300 transition-colors duration-200">Cargus Logistics</span>
+            <span className="text-lg font-semibold group-hover:text-blue-300 transition-colors duration-200 hidden xs:block">Cargus Logistics</span>
+            <span className="text-sm font-semibold group-hover:text-blue-300 transition-colors duration-200 xs:hidden">Cargus</span>
           </button>
 
-          {/* Desktop Menu - Changed from lg:flex to md:flex for better visibility */}
-          <div className="hidden md:flex items-center space-x-4 xl:space-x-6">
+          {/* Desktop Menu - Shows on larger screens */}
+          <div className="hidden lg:flex items-center space-x-6">
             <button 
               onClick={toggleLanguage}
-              className="flex items-center space-x-2 text-slate-300 hover:text-white transition-colors group text-sm xl:text-base"
+              className="flex items-center space-x-2 text-slate-300 hover:text-white transition-colors group"
             >
               <Languages size={16} className="group-hover:scale-110 transition-transform duration-200" />
               <span>{t.languageToggle}</span>
             </button>
-            <a href="#services" className="text-slate-300 hover:text-white transition-colors text-sm xl:text-base">{t.services}</a>
+            <a href="#services" className="text-slate-300 hover:text-white transition-colors">{t.services}</a>
             <button 
               onClick={() => handleNavigation('about')}
-              className="text-slate-300 hover:text-white transition-colors text-sm xl:text-base"
+              className="text-slate-300 hover:text-white transition-colors"
             >
               {t.about}
             </button>
             <button 
               onClick={() => handleNavigation('contact')}
-              className="text-slate-300 hover:text-white transition-colors text-sm xl:text-base"
+              className="text-slate-300 hover:text-white transition-colors"
             >
               {t.contact}
             </button>
@@ -106,18 +107,24 @@ function App() {
             </button>
             <button 
               onClick={() => handleNavigation('getQuote')}
-              className="bg-blue-600 hover:bg-blue-700 px-3 xl:px-4 py-2 rounded-lg font-medium transition-colors text-sm xl:text-base"
+              className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium transition-colors"
             >
               {t.getQuote}
             </button>
           </div>
 
-          {/* Mobile Menu Button - Changed from lg:hidden to md:hidden */}
+          {/* Mobile Menu Button - Always visible on mobile */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden p-3 rounded-lg hover:bg-slate-800/50 transition-colors touch-manipulation"
+            className="lg:hidden p-3 rounded-lg hover:bg-slate-800/50 transition-colors touch-manipulation flex-shrink-0"
             aria-label="Toggle mobile menu"
-            style={{ minHeight: '44px', minWidth: '44px' }}
+            style={{ 
+              minHeight: '48px', 
+              minWidth: '48px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
           >
             {isMobileMenuOpen ? (
               <X size={24} className="text-white" />
@@ -127,13 +134,13 @@ function App() {
           </button>
         </div>
 
-        {/* Mobile Menu - Changed from lg:hidden to md:hidden */}
-        <div className={`md:hidden transition-all duration-300 ease-in-out ${
+        {/* Mobile Menu - Improved mobile visibility */}
+        <div className={`lg:hidden transition-all duration-300 ease-in-out ${
           isMobileMenuOpen 
             ? 'max-h-screen opacity-100 visible' 
             : 'max-h-0 opacity-0 invisible overflow-hidden'
         }`}>
-          <div className="px-4 sm:px-6 py-6 bg-slate-950/95 backdrop-blur-md border-t border-slate-800/50">
+          <div className="px-4 py-6 bg-slate-950/95 backdrop-blur-md border-t border-slate-800/50">
             <div className="flex flex-col space-y-6">
               <button 
                 onClick={() => {
@@ -141,7 +148,7 @@ function App() {
                   setIsMobileMenuOpen(false);
                 }}
                 className="flex items-center space-x-3 text-slate-300 hover:text-white transition-colors py-3 border-b border-slate-800/50 touch-manipulation"
-                style={{ minHeight: '44px' }}
+                style={{ minHeight: '48px' }}
               >
                 <Languages size={20} />
                 <span className="text-lg">{t.languageToggle}</span>
@@ -150,21 +157,21 @@ function App() {
                 href="#services" 
                 className="text-slate-300 hover:text-white transition-colors py-3 border-b border-slate-800/50 text-lg touch-manipulation"
                 onClick={() => setIsMobileMenuOpen(false)}
-                style={{ minHeight: '44px', display: 'flex', alignItems: 'center' }}
+                style={{ minHeight: '48px', display: 'flex', alignItems: 'center' }}
               >
                 {t.services}
               </a>
               <button 
                 onClick={() => handleNavigation('about')}
                 className="text-slate-300 hover:text-white transition-colors py-3 border-b border-slate-800/50 text-left text-lg touch-manipulation"
-                style={{ minHeight: '44px' }}
+                style={{ minHeight: '48px' }}
               >
                 {t.about}
               </button>
               <button 
                 onClick={() => handleNavigation('contact')}
                 className="text-slate-300 hover:text-white transition-colors py-3 border-b border-slate-800/50 text-left text-lg touch-manipulation"
-                style={{ minHeight: '44px' }}
+                style={{ minHeight: '48px' }}
               >
                 {t.contact}
               </button>
@@ -174,7 +181,7 @@ function App() {
                   setIsMobileMenuOpen(false);
                 }}
                 className="flex items-center space-x-3 text-slate-300 hover:text-pink-400 transition-colors py-3 border-b border-slate-800/50 touch-manipulation"
-                style={{ minHeight: '44px' }}
+                style={{ minHeight: '48px' }}
               >
                 <Instagram size={20} />
                 <span className="text-lg">Instagram</span>
@@ -182,7 +189,7 @@ function App() {
               <button 
                 onClick={() => handleNavigation('getQuote')}
                 className="bg-blue-600 hover:bg-blue-700 px-6 py-4 rounded-lg font-medium transition-colors text-center mt-4 text-lg touch-manipulation"
-                style={{ minHeight: '44px' }}
+                style={{ minHeight: '48px' }}
               >
                 {t.getQuote}
               </button>
@@ -192,7 +199,7 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative z-10 px-4 sm:px-6 pt-32 pb-32">
+      <section className="relative z-10 px-4 pt-32 pb-32">
         <div className="max-w-7xl mx-auto">
           {/* Trust indicators */}
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8 mb-12">
@@ -231,7 +238,7 @@ function App() {
               <button 
                 onClick={() => handleNavigation('getQuote')}
                 className="group bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center space-x-2 text-lg w-full sm:w-auto justify-center touch-manipulation"
-                style={{ minHeight: '44px' }}
+                style={{ minHeight: '48px' }}
               >
                 <span>{t.getQuoteBtn}</span>
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
@@ -240,7 +247,7 @@ function App() {
               <button 
                 className="group text-slate-400 font-medium py-4 px-8 rounded-xl border border-slate-700 bg-slate-700/40 cursor-not-allowed opacity-60 flex items-center space-x-2 text-lg select-none pointer-events-none w-full sm:w-auto justify-center"
                 aria-disabled="true"
-                style={{ minHeight: '44px' }}
+                style={{ minHeight: '48px' }}
               >
                 <Ship size={20} className="" />
                 <span>Coming Soon</span>
@@ -260,7 +267,7 @@ function App() {
       </div>
 
       {/* Services Section */}
-      <section id="services" className="relative bg-slate-900 py-24 px-4 sm:px-6">
+      <section id="services" className="relative bg-slate-900 py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">{t.ourServices}</h2>
@@ -312,7 +319,7 @@ function App() {
         </svg>
       </div>
 
-      <section className="relative bg-slate-800 py-24 px-4 sm:px-6">
+      <section className="relative bg-slate-800 py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="group">
@@ -336,7 +343,7 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="relative bg-slate-950 py-20 px-4 sm:px-6 border-t border-slate-800">
+      <footer className="relative bg-slate-950 py-20 px-4 border-t border-slate-800">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-3 mb-12">
             <div className="w-7 h-7 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
@@ -354,7 +361,7 @@ function App() {
               onClick={openInstagram}
               className="group bg-slate-800/50 hover:bg-pink-500/20 p-3 rounded-xl border border-slate-700 hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1 touch-manipulation"
               aria-label="Follow us on Instagram"
-              style={{ minHeight: '44px', minWidth: '44px' }}
+              style={{ minHeight: '48px', minWidth: '48px' }}
             >
               <Instagram size={24} className="text-slate-400 group-hover:text-pink-400 transition-colors duration-300" />
             </button>
