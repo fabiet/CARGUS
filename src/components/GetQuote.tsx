@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Ship, Package, Globe, Truck, Plane, CheckCircle, Menu, X, Send, Calculator, Ruler, Languages } from 'lucide-react';
+import { Ship, Package, Globe, Truck, Plane, CheckCircle, Menu, X, Send, Calculator, Ruler, Languages, Instagram } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
 import { supabase } from '../supabaseClient';
@@ -59,6 +59,10 @@ function GetQuote({ onNavigate }: GetQuoteProps) {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const openInstagram = () => {
+    window.open('https://www.instagram.com/carguslogistics/', '_blank');
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -225,6 +229,13 @@ function GetQuote({ onNavigate }: GetQuoteProps) {
             >
               {t.contact}
             </button>
+            <button 
+              onClick={openInstagram}
+              className="text-slate-300 hover:text-pink-400 transition-colors group"
+              aria-label="Follow us on Instagram"
+            >
+              <Instagram size={20} className="group-hover:scale-110 transition-transform duration-200" />
+            </button>
             <span className="text-white font-medium bg-blue-600/20 px-3 py-1 rounded-lg">{t.getQuote}</span>
           </div>
 
@@ -286,6 +297,16 @@ function GetQuote({ onNavigate }: GetQuoteProps) {
                 className="text-slate-300 hover:text-white transition-colors py-2 border-b border-slate-800/50 text-left"
               >
                 {t.contact}
+              </button>
+              <button 
+                onClick={() => {
+                  openInstagram();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="flex items-center space-x-2 text-slate-300 hover:text-pink-400 transition-colors py-2 border-b border-slate-800/50"
+              >
+                <Instagram size={16} />
+                <span>Instagram</span>
               </button>
               <span className="text-white font-medium py-2 border-b border-slate-800/50 bg-blue-600/20 px-3 rounded-lg">
                 {t.getQuote}
@@ -798,6 +819,18 @@ function GetQuote({ onNavigate }: GetQuoteProps) {
           <p className="text-slate-400 mb-8">
             {t.footerDescription}
           </p>
+          
+          {/* Social Media Section */}
+          <div className="flex items-center justify-center mb-8">
+            <button 
+              onClick={openInstagram}
+              className="group bg-slate-800/50 hover:bg-pink-500/20 p-3 rounded-xl border border-slate-700 hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1"
+              aria-label="Follow us on Instagram"
+            >
+              <Instagram size={24} className="text-slate-400 group-hover:text-pink-400 transition-colors duration-300" />
+            </button>
+          </div>
+          
           <div className="flex items-center justify-center space-x-8 text-sm text-slate-500">
             <span>{t.copyright}</span>
             <a href="#" className="hover:text-slate-300 transition-colors">{t.privacyPolicy}</a>
