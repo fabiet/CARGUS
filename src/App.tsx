@@ -75,25 +75,25 @@ function App() {
             <span className="text-lg sm:text-xl font-semibold group-hover:text-blue-300 transition-colors duration-200">Cargus Logistics</span>
           </button>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-6">
+          {/* Desktop Menu - Changed from lg:flex to md:flex for better visibility */}
+          <div className="hidden md:flex items-center space-x-4 xl:space-x-6">
             <button 
               onClick={toggleLanguage}
-              className="flex items-center space-x-2 text-slate-300 hover:text-white transition-colors group"
+              className="flex items-center space-x-2 text-slate-300 hover:text-white transition-colors group text-sm xl:text-base"
             >
               <Languages size={16} className="group-hover:scale-110 transition-transform duration-200" />
               <span>{t.languageToggle}</span>
             </button>
-            <a href="#services" className="text-slate-300 hover:text-white transition-colors">{t.services}</a>
+            <a href="#services" className="text-slate-300 hover:text-white transition-colors text-sm xl:text-base">{t.services}</a>
             <button 
               onClick={() => handleNavigation('about')}
-              className="text-slate-300 hover:text-white transition-colors"
+              className="text-slate-300 hover:text-white transition-colors text-sm xl:text-base"
             >
               {t.about}
             </button>
             <button 
               onClick={() => handleNavigation('contact')}
-              className="text-slate-300 hover:text-white transition-colors"
+              className="text-slate-300 hover:text-white transition-colors text-sm xl:text-base"
             >
               {t.contact}
             </button>
@@ -106,16 +106,16 @@ function App() {
             </button>
             <button 
               onClick={() => handleNavigation('getQuote')}
-              className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium transition-colors"
+              className="bg-blue-600 hover:bg-blue-700 px-3 xl:px-4 py-2 rounded-lg font-medium transition-colors text-sm xl:text-base"
             >
               {t.getQuote}
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Changed from lg:hidden to md:hidden */}
           <button
             onClick={toggleMobileMenu}
-            className="lg:hidden p-3 rounded-lg hover:bg-slate-800/50 transition-colors touch-manipulation"
+            className="md:hidden p-3 rounded-lg hover:bg-slate-800/50 transition-colors touch-manipulation"
             aria-label="Toggle mobile menu"
             style={{ minHeight: '44px', minWidth: '44px' }}
           >
@@ -127,8 +127,8 @@ function App() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        <div className={`lg:hidden transition-all duration-300 ease-in-out ${
+        {/* Mobile Menu - Changed from lg:hidden to md:hidden */}
+        <div className={`md:hidden transition-all duration-300 ease-in-out ${
           isMobileMenuOpen 
             ? 'max-h-screen opacity-100 visible' 
             : 'max-h-0 opacity-0 invisible overflow-hidden'
