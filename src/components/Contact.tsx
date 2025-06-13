@@ -116,7 +116,7 @@ function Contact({ onNavigate }: ContactProps) {
         <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-500/5 to-purple-500/10"></div>
       </div>
 
-      {/* Navigation */}
+      {/* Navigation - Standard Responsive Design */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? 'bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50 py-4' 
@@ -133,8 +133,8 @@ function Contact({ onNavigate }: ContactProps) {
             <span className="text-xl font-semibold group-hover:text-blue-300 transition-colors duration-200">Cargus Logistics</span>
           </button>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Menu - Only shows on lg screens and above (1024px+) */}
+          <div className="hidden lg:flex items-center space-x-8">
             <button 
               onClick={toggleLanguage}
               className="flex items-center space-x-2 text-slate-300 hover:text-white transition-colors group"
@@ -170,10 +170,10 @@ function Contact({ onNavigate }: ContactProps) {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Only shows below lg breakpoint */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden p-2 rounded-lg hover:bg-slate-800/50 transition-colors"
+            className="lg:hidden p-2 rounded-lg hover:bg-slate-800/50 transition-colors"
             aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? (
@@ -184,8 +184,8 @@ function Contact({ onNavigate }: ContactProps) {
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        <div className={`md:hidden transition-all duration-300 ease-in-out ${
+        {/* Mobile Menu - Only shows below lg breakpoint */}
+        <div className={`lg:hidden transition-all duration-300 ease-in-out ${
           isMobileMenuOpen 
             ? 'max-h-96 opacity-100' 
             : 'max-h-0 opacity-0 overflow-hidden'
